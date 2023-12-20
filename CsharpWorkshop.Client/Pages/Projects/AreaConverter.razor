@@ -1,0 +1,66 @@
+﻿@page "/AreaCalculator"
+
+<h3>Area Converter</h3>
+
+<p>Total Area: @total pieces</p>
+<p>Total Cost at 180 dollars a piece: $@totalCost</p>
+<hr />
+Rectangle Width: @RectWidth
+<input type="number" class="form-control" @bind="RectWidth" />
+Rectangle Length: @RectLength
+<input type="number" class="form-control" @bind="RectLength" />
+Circle Radius: @CircRadius
+<input type="number" class="form-control" @bind="CircRadius" />
+Triangle Base: @TriBottom
+<input type="number" class="form-control" @bind="TriBottom" />
+Triangle Height: @TriHeight
+<input type="number" class="form-control" @bind="TriHeight" />
+
+<input type="button" class="btn btn-primary" value="Calculate" @onclick="OnInitialized" />
+
+
+@code {
+    private double total;
+    private double totalCost;
+    private double RectLength;
+    private double RectWidth;
+    private double CircRadius;
+    private double TriBottom;
+    private double TriHeight;
+
+    protected override void OnInitialized()
+    {
+        total = Math.Ceiling(RectArea() + CircArea() + TriArea());
+        totalCost = Math.Round(total * 180, 2);
+    }
+
+    private double RectArea()
+    {
+        return Rect(RectLength, RectWidth);
+    }
+
+    private double CircArea()
+    {
+        return Circle(CircRadius);
+    }
+
+    private double TriArea()
+    {
+        return Triangle(TriBottom, TriHeight);
+    }
+
+    private double Rect(double length, double width)
+    {
+        return length * width;
+    }
+
+    private double Circle(double radius)
+    {
+        return Math.PI * Math.Pow(radius, 2);
+    }
+
+    private double Triangle(double bottom, double height)
+    {
+        return 0.5 * bottom * height;
+    }
+}
