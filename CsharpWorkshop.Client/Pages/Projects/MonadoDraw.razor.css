@@ -1,0 +1,24 @@
+﻿path {
+    fill-opacity: 0;
+    stroke: #000 !important;
+    stroke-width: 3 !important;
+    stroke-dasharray: 62718;
+    stroke-dashoffset: 62718;
+    animation: draw 20s 1 linear;
+    animation-fill-mode: forwards;
+}
+
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

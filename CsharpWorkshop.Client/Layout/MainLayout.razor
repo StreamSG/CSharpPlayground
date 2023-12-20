@@ -1,17 +1,17 @@
 ﻿@inherits LayoutComponentBase
+@using MudBlazor
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
 <div class="page">
-    
     <div class="sidebar">
         <NavMenu />
-
     </div>
 
     <main>
         <div class="top-row px-4">
-            <MudBlazor.MudThemeProvider />
-            <MudBlazor.MudDialogProvider />
-            <MudBlazor.MudSnackbarProvider />
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
 

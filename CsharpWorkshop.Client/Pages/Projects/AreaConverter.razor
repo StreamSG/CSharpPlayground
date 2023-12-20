@@ -5,19 +5,28 @@
 <p>Total Area: @total pieces</p>
 <p>Total Cost at 180 dollars a piece: $@totalCost</p>
 <hr />
-Rectangle Width: @RectWidth
-<input type="number" class="form-control" @bind="RectWidth" />
-Rectangle Length: @RectLength
-<input type="number" class="form-control" @bind="RectLength" />
-Circle Radius: @CircRadius
-<input type="number" class="form-control" @bind="CircRadius" />
-Triangle Base: @TriBottom
-<input type="number" class="form-control" @bind="TriBottom" />
-Triangle Height: @TriHeight
-<input type="number" class="form-control" @bind="TriHeight" />
+Rectangle Width: @RectWidth 
+<br />
+<MudInput @bind-Value="RectWidth" Label="Rectangle Width" Variant="Variant.Filled" /><br /> 
+Rectangle Length: @RectLength 
+<br />
+<MudInput @bind-Value="RectLength" Label="Rectangle Length" Variant="Variant.Filled" />
+<br />
+Circle Radius: @CircRadius 
+<br />
+<MudInput @bind-Value="CircRadius" Label="Circle Radius" Variant="Variant.Filled" />
+<br />
+Triangle Base: @TriBottom 
+<br />
+<MudInput @bind-Value="TriBottom" Label="Triangle Base" Variant="Variant.Filled" />
+<br />
+Triangle Height: @TriHeight 
+<br />
+<MudInput @bind-Value="TriHeight" Label="Triangle Height" Variant="Variant.Filled" />
+<br />
 
-<input type="button" class="btn btn-primary" value="Calculate" @onclick="OnInitialized" />
 
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnInitialized">Calculate</MudButton>
 
 @code {
     private double total;

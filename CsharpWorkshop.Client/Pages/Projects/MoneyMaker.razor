@@ -2,12 +2,15 @@
 
 <h3>Welcome to Money Maker!</h3>
 <h4>Input the amount that you would like to convert:</h4>
-<input type="text" @bind="cents" />
-<button class="btn btn-primary" @onclick="CalculateCoins">Click me</button>
-
-<h6>You Have @goldCoins number of gold coins!</h6>
-<h6>You Have @silverCoins number of silver coins!</h6>
-<h6>You Have @bronzeCoins number of bronze coins!</h6>
+<MudTextField @bind-Value="cents" Label="Cents" Variant="Variant.Filled" />
+<br />
+<hr />
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="CalculateCoins">Click me</MudButton>
+<br />
+<hr />
+<h6>You Have @goldCoins number of gold coins!</h6> <br />
+<h6>You Have @silverCoins number of silver coins!</h6><br />
+<h6>You Have @bronzeCoins number of bronze coins!</h6><br />
 
 @code {
 private double cents;
