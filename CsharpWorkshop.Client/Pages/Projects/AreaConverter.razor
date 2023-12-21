@@ -3,7 +3,7 @@
 <h3>Area Converter</h3>
 
 <p>Total Area: @total pieces</p>
-<p>Total Cost at 180 dollars a piece: $@totalCost</p>
+<p>Total Cost at 180 dollars a piece: @totalCostToDollars()</p>
 <hr />
 Rectangle Width: @RectWidth 
 <br />
@@ -37,12 +37,18 @@ Triangle Height: @TriHeight
     private double TriBottom;
     private double TriHeight;
 
+   
+
     protected override void OnInitialized()
     {
         total = Math.Ceiling(RectArea() + CircArea() + TriArea());
         totalCost = Math.Round(total * 180, 2);
     }
 
+    private string totalCostToDollars()
+    {
+        return totalCost.ToString("C");
+    }
     private double RectArea()
     {
         return Rect(RectLength, RectWidth);
