@@ -1,224 +1,88 @@
-﻿@* <h3>Component</h3>
+﻿@page "/BuildACreature"
+@using MudBlazor
+
+<h3>Build a Creature!</h3>
+
+<MudSelect T="string" Label="Head" AnchorOrigin="Origin.BottomCenter">
+<MudSelectItem Value="1">Ghost Head</MudSelectItem>
+    <MudSelectItem Value="2">Monster Head</MudSelectItem>
+    <MudSelectItem Value="3">Bug Head</MudSelectItem>
+</MudSelect>
+
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@RandomizeCreature">Randomize</MudButton>
+
+@if (creatureString != null)
+{
+    <pre>@SwitchCase(randomParts.head, "head")</pre>
+    <pre>@SwitchCase(randomParts.body, "body")</pre>
+    <pre>@SwitchCase(randomParts.feet, "feet")</pre>
+}
 
 @code {
-    class Program
+    private CreatureParts randomParts; // Define randomParts at the component level
+    private string? creatureString;
+
+    private void RandomizeCreature()
     {
-        static void Main(string[] args)
+        randomParts = RandomMode();
+        creatureString = BuildCreature(randomParts.head, randomParts.body, randomParts.feet);
+    }
+
+    private struct CreatureParts
+    {
+        public int head;
+        public int body;
+        public int feet;
+    }
+
+    private string BuildCreature(int head, int body, int feet)
+    {
+        return $"{SwitchCase(head, "head")}\n{SwitchCase(body, "body")}\n{SwitchCase(feet, "feet")}";
+    }
+
+    private string SwitchCase(int part, string partType)
+    {
+        switch (partType)
         {
-            string head;
-            string body;
-            string feet;
-            MonsterHead();
-            GhostBody();
-            BugFeet();
-
-        <h3>Component</h3>
-
-        @code {
-            class Program
-            {
-                static void Main(string[] args)
+            case "head":
+                switch (part)
                 {
-                    string head;
-                    string body;
-                    string feet;
-                    MonsterHead();
-                    GhostBody();
-                    BugFeet();
-
+                    case 1: return "     ..-..\n    ( o o )\n    |  O  |";
+                    case 2: return "     _____\n .-,;='';_),-.\n  \\_\\(),()/_/\n　  (,___,)";
+                    case 3: return "     /   \\\n     \\. ./\n    (o + o)";
+                    default: return string.Empty;
                 }
 
-                static void buildACreature(string head, string body, string feet)
+            case "body":
+                switch (part)
                 {
-                    Console.WriteLine(head);
-                    Console.WriteLine(body);
-                    Console.WriteLine(feet);
+                    case 1: return "    |     |\n    |     |\n    |     |";
+                    case 2: return "   ,-/`~`\\-,___\n  / /).:.('--._)\n {_[ (_,_)";
+                    case 3: return "  --|  |  |--\n  --|  |  |--\n  --|  |  |--";
+                    default: return string.Empty;
                 }
 
-                static void GhostHead()
+            case "feet":
+                switch (part)
                 {
-                    return "     ..-..\n    ( o o )\n    |  O  |";
+                    case 1: return "    |     |\n    |     |\n    '~~~~~'";
+                    case 2: return "    |  Y  |\n   /   |   \\\n   \"\"\"\" \"\"\"\"";
+                    case 3: return "     v   v\n     *****";
+                    default: return string.Empty;
                 }
 
-                static void GhostBody()
-                {
-                    return "    |     |\n    |     |\n    |     |";
-                }
-
-                static void GhostFeet()
-                {
-                    return "    |     |\n    |     |\n    '~~~~~'";
-                }
-
-                static void BugHead()
-                {
-                    return "     /   \\\n     \\. ./\n    (o + o)";
-                }
-
-                static void BugBody()
-                {
-                    return "  --|  |  |--\n  --|  |  |--\n  --|  |  |--";
-                }
-
-                static void BugFeet()
-                {
-                    return "     v   v\n     *****";
-                }
-
-                static void MonsterHead()
-                {
-                    return "     _____\n .-,;='';_),-.\n  \\_\\(),()/_/\n　  (,___,)";
-                }
-
-                static void MonsterBody()
-                {
-                    return "   ,-/`~`\\-,___\n  / /).:.('--._)\n {_[ (_,_)";
-                }
-
-                static void MonsterFeet()
-                {
-                    return "    |  Y  |\n   /   |   \\\n   \"\"\"\" \"\"\"\"";
-                }
-            }
-        }
-        }
-
-        static void buildACreature(string head, string body, string feet)
-        {
-            switch head   
-        <h3>Component</h3>
-
-        @code {
-            class Program
-            {
-                static void Main(string[] args)
-                {
-                    string head;
-                    string body;
-                    string feet;
-                    MonsterHead();
-                    GhostBody();
-                    BugFeet();
-
-                }
-
-                static void buildACreature(string head, string body, string feet)
-                {
-                    Console.WriteLine(head);
-                    Console.WriteLine(body);
-                    Console.WriteLine(feet);
-                }
-
-                static void GhostHead()
-                {
-                    return "     ..-..\n    ( o o )\n    |  O  |";
-                }
-
-                static void GhostBody()
-                {
-                    return "    |     |\n    |     |\n    |     |";
-                }
-
-                static void GhostFeet()
-                {
-                    return "    |     |\n    |     |\n    '~~~~~'";
-                }
-
-                static void BugHead()
-                {
-                    return "     /   \\\n     \\. ./\n    (o + o)";
-                }
-
-                static void BugBody()
-                {
-                    return "  --|  |  |--\n  --|  |  |--\n  --|  |  |--";
-                }
-
-                static void BugFeet()
-                {
-                    return "     v   v\n     *****";
-                }
-
-                static void MonsterHead()
-                {
-                    return "     _____\n .-,;='';_),-.\n  \\_\\(),()/_/\n　  (,___,)";
-                }
-
-                static void MonsterBody()
-                {
-                    return "   ,-/`~`\\-,___\n  / /).:.('--._)\n {_[ (_,_)";
-                }
-
-                static void MonsterFeet()
-                {
-                    return "    |  Y  |\n   /   |   \\\n   \"\"\"\" \"\"\"\"";
-                }
-            }
-        }
-        }
-
-        static void GhostHead()
-        {
-            Console.WriteLine("     ..-..");
-            Console.WriteLine("    ( o o )");
-            Console.WriteLine("    |  O  |");
-        }
-
-        static void GhostBody()
-        {
-            Console.WriteLine("    |     |");
-            Console.WriteLine("    |     |");
-            Console.WriteLine("    |     |");
-        }
-
-        static void GhostFeet()
-        {
-            Console.WriteLine("    |     |");
-            Console.WriteLine("    |     |");
-            Console.WriteLine("    '~~~~~'");
-        }
-
-        static void BugHead()
-        {
-            Console.WriteLine("     /   \\");
-            Console.WriteLine("     \\. ./");
-            Console.WriteLine("    (o + o)");
-        }
-
-        static void BugBody()
-        {
-            Console.WriteLine("  --|  |  |--");
-            Console.WriteLine("  --|  |  |--");
-            Console.WriteLine("  --|  |  |--");
-        }
-
-        static void BugFeet()
-        {
-            Console.WriteLine("     v   v");
-            Console.WriteLine("     *****");
-        }
-
-        static void MonsterHead()
-        {
-            Console.WriteLine("     _____");
-            Console.WriteLine(" .-,;='';_),-.");
-            Console.WriteLine("  \\_\\(),()/_/");
-            Console.WriteLine("　  (,___,)");
-        }
-
-        static void MonsterBody()
-        {
-            Console.WriteLine("   ,-/`~`\\-,___");
-            Console.WriteLine("  / /).:.('--._)");
-            Console.WriteLine(" {_[ (_,_)");
-        }
-
-        static void MonsterFeet()
-        {
-            Console.WriteLine("    |  Y  |");
-            Console.WriteLine("   /   |   \\");
-            Console.WriteLine("   \"\"\"\" \"\"\"\"");
+            default: return string.Empty;
         }
     }
+
+    private CreatureParts RandomMode()
+    {
+        Random random = new Random();
+        return new CreatureParts
+            {
+                head = random.Next(1, 4),
+                body = random.Next(1, 4),
+                feet = random.Next(1, 4)
+            };
+    }
 }
- *@

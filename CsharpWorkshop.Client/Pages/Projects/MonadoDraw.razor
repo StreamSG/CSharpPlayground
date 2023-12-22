@@ -70,6 +70,14 @@ l-86 -101 -74 -18 c-128 -30 -135 -33 -189 -98 -41 -49 -50 -66 -45 -88 4 -21
 -101 -42 -254 -47 -295 -10 -12 10 -24 27 -28 36 -5 14 -47 -30 -186 -194z" />
         </g>
     </svg>
-@code {
 
-}
+@*     <pre>@asciiArt</pre>  *@
+
+@* @code {
+    private string asciiArt;
+
+    protected override async Task OnInitializedAsync()
+    {
+        asciiArt = await Http.GetStringAsync("monado.txt");
+    }
+} *@
