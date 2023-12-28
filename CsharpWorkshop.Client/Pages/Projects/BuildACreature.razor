@@ -3,28 +3,52 @@
 
 <h3>Build a Creature!</h3>
 
-<MudSelect T="string" Label="Head" AnchorOrigin="Origin.BottomCenter">
-<MudSelectItem Value="1">Ghost Head</MudSelectItem>
+<MudSelect T="int" Label="Head" AnchorOrigin="Origin.BottomCenter" @bind-Value="randomParts.head">
+    <MudSelectItem Value="1">Ghost Head</MudSelectItem>
     <MudSelectItem Value="2">Monster Head</MudSelectItem>
     <MudSelectItem Value="3">Bug Head</MudSelectItem>
 </MudSelect>
+<br />
+<MudSelect T="int" Label="Body" AnchorOrigin="Origin.BottomCenter" @bind-Value="randomParts.body">
+    <MudSelectItem Value="1">Ghost Body</MudSelectItem>
+    <MudSelectItem Value="2">Monster Body</MudSelectItem>
+    <MudSelectItem Value="3">Bug Body</MudSelectItem>
+</MudSelect>
+<br />
+<MudSelect T="int" Label="Feet" AnchorOrigin="Origin.BottomCenter" @bind-Value="randomParts.feet">
+    <MudSelectItem Value="1">Ghost Feet</MudSelectItem>
+    <MudSelectItem Value="2">Monster Feet</MudSelectItem>
+    <MudSelectItem Value="3">Bug Feet</MudSelectItem>
+</MudSelect>
+<br />
 
-<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@RandomizeCreature">Randomize</MudButton>
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@BuildSelectedCreature">Build Selected Creature</MudButton>
+<MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="@RandomizeCreature">Randomize</MudButton>
 
+<br />
+<br />
 @if (creatureString != null)
 {
-    <pre>@SwitchCase(randomParts.head, "head")</pre>
-    <pre>@SwitchCase(randomParts.body, "body")</pre>
-    <pre>@SwitchCase(randomParts.feet, "feet")</pre>
+    <pre>@creatureString</pre>
+}
+else
+{
+    <p>Click a button to create your creature!</p>
 }
 
 @code {
     private CreatureParts randomParts; // Define randomParts at the component level
+    private CreatureParts selectedParts = new CreatureParts(); // For binding dropdowns
     private string? creatureString;
 
     private void RandomizeCreature()
     {
         randomParts = RandomMode();
+        creatureString = BuildCreature(randomParts.head, randomParts.body, randomParts.feet);
+    }
+
+    private void BuildSelectedCreature()
+    {
         creatureString = BuildCreature(randomParts.head, randomParts.body, randomParts.feet);
     }
 

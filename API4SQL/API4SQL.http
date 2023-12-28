@@ -1,0 +1,6 @@
+@API4SQL_HostAddress = http://localhost:5277
+
+GET {{API4SQL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,39 @@
+﻿@page "/Cs2SQL"
+@inject HttpClient Http
+@using MudBlazor
+@using CsharpWorkshop.Models
+
+
+
+
+<h3>Data Manipulation</h3>
+<h6>In this component we are going to write code to read and write to an SQL server using Entity Framework</h6>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in customers)
+        {
+            <tr>
+                <td>@customer.ARSMAST_NO</td>
+                <td>@customer.ARSMAST_NAME</td>
+                <!-- Other data columns -->
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+    private List<CustomerClass> customers = new List<CustomerClass>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await Http.GetFromJsonAsync<List<CustomerClass>>("https://localhost:5001/api/Customers");
+    }
+}
