@@ -8,7 +8,7 @@ namespace API4SQL.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Cool", "Bracing1", "Chilly2", "Cool3", "Mild4", "Warm5", "Balmy6", "Hot7", "Sweltering8", "Scorching9"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
@@ -19,7 +19,7 @@ namespace API4SQL.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public  IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
