@@ -1,5 +1,10 @@
 using API4SQL;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

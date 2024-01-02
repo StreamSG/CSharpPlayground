@@ -1,6 +1,6 @@
-﻿@page "/MoneyMaker"
+﻿@page "/CoinCounter"
 
-<h3>Welcome to Money Maker!</h3>
+<h3>Welcome to Coin Counter!</h3>
 <h4>Input the amount that you would like to convert:</h4>
 <MudTextField @bind-Value="cents" Label="Cents" Variant="Variant.Filled" />
 <br />
@@ -8,26 +8,38 @@
 <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="CalculateCoins">Click me</MudButton>
 <br />
 <hr />
-<h6>You Have @goldCoins number of gold coins!</h6> <br />
-<h6>You Have @silverCoins number of silver coins!</h6><br />
-<h6>You Have @bronzeCoins number of bronze coins!</h6><br />
+<h6>You Have @totalQ number of Quarters!</h6>
+<br />
+<h6>You Have @totalD number of Dimes!</h6>
+<br />
+<h6>You Have @totalN number of Nickles!</h6>
+<br />
+<h6>You Have @totalP number of Pennies!</h6>
+<br />
 
 @code {
-private double cents;
-private double goldCoins;
-private double silverCoins;
-private double bronzeCoins;
+    private double cents; // Consider changing to int if cents are always whole numbers
+    private int totalQ;
+    private int totalD;
+    private int totalN;
+    private int totalP;
 
-        private void CalculateCoins()
-        {
-            int gold = 10;
-            int silver = 5;
-            int bronze = 1;
+    private void CalculateCoins()
+    {
+        int quarters = 25;
+        int dimes = 10;
+        int nickels = 5;
+        int pennies = 1;
 
-            goldCoins = Math.Floor(cents / gold);
-            double goldLeft = cents % gold;
-            silverCoins = Math.Floor(goldLeft / silver);
-            double silverLeft = goldLeft % silver;
-            bronzeCoins = Math.Ceiling(silverLeft / bronze);
-        }
+        totalQ = (int)(cents / quarters); // Number of quarters
+        double remainingAfterQuarters = cents % quarters;
+
+        totalD = (int)(remainingAfterQuarters / dimes); // Number of dimes
+        double remainingAfterDimes = remainingAfterQuarters % dimes;
+
+        totalN = (int)(remainingAfterDimes / nickels); // Number of nickels
+        double remainingAfterNickels = remainingAfterDimes % nickels;
+
+        totalP = (int)(remainingAfterNickels / pennies); // Number of pennies
     }
+}

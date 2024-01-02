@@ -3,37 +3,81 @@
 @using MudBlazor
 @using CsharpWorkshop.Models
 
-
-
-
 <h3>Data Manipulation</h3>
 <h6>In this component we are going to write code to read and write to an SQL server using Entity Framework</h6>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var customer in customers)
-        {
-            <tr>
-                <td>@customer.ARSMAST_NO</td>
-                <td>@customer.ARSMAST_NAME</td>
-                <!-- Other data columns -->
-            </tr>
-        }
-    </tbody>
-</table>
+<MudInput @bind-Value="inputCustomerId" Label="Customer ID" Variant="Variant.Filled" />
+<MudButtonGroup>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => GetAllCustomers())">Get All Customers</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => GetCustomerById(inputCustomerId))">Get Customer</MudButton>
+</MudButtonGroup>
+@if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error" Dense="true" ShowCloseIcon="true">@errorMessage</MudAlert>
+}
+@if (isLoading == true)
+{
+    <MudText Typo="Typo.h5">Waiting for database...</MudText>
+    <MudProgressLinear Color="Color.Primary" Striped="true" Size="Size.Large" Indeterminate="true" />
+}
+else
+{
+    <MudTable Items="customers" Dense="true" Hover="true" Striped="true">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Phone</MudTh>
+            <MudTh>E-Mail</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="ID">@context.ARSMAST_NAME</MudTd>
+            <MudTd DataLabel="Name">@context.ARSMAST_PHONE1</MudTd>
+            <MudTd DataLabel="Email">@context.ARSMAST_YR_EMAIL</MudTd>
 
+            </RowTemplate>
+        </MudTable>
+}
 
 @code {
-    private List<CustomerClass> customers = new List<CustomerClass>();
+    private List<CustomerClass>? customers;
+    private int inputCustomerId;
+    private bool isLoading;
+    private string? errorMessage;
 
-    protected override async Task OnInitializedAsync()
+
+    private async Task GetAllCustomers()
     {
-        customers = await Http.GetFromJsonAsync<List<CustomerClass>>("https://localhost:5001/api/Customers");
+        try
+        {
+            isLoading = true;
+            customers = await Http.GetFromJsonAsync<List<CustomerClass>>("https://localhost:7035/api/Customer");
+            isLoading = false;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+    private async Task GetCustomerById(int id)
+    {
+        try
+        {
+            isLoading = true;
+            var response = await Http.GetFromJsonAsync<CustomerClass>($"https://localhost:7035/api/Customer/{id}");
+            if (response != null)
+            {
+                customers = new List<CustomerClass> { response };
+            }
+            else
+            {
+                customers = new List<CustomerClass>();
+            }
+            isLoading = false;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+
+        }
     }
 }

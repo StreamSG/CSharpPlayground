@@ -1,6 +1,6 @@
 ﻿@page "/weather"
-@using MudBlazor
 @inject HttpClient Http
+@using MudBlazor
 
 <PageTitle>Weather</PageTitle>
 
@@ -36,8 +36,17 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("https://localhost:7035/WeatherForecast");
+        try
+        {
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("https://localhost:7035/WeatherForecast");
+        }
+        catch (Exception ex)
+        {
+            // Handle or log the exception
+            Console.WriteLine($"Error fetching data: {ex.Message}");
+        }
     }
+
 
     public class WeatherForecast
     {

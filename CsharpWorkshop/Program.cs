@@ -10,6 +10,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:7035") });
+
 builder.Services.AddMudServices();
 
 var app = builder.Build();

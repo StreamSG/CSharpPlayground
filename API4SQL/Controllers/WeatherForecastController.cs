@@ -8,7 +8,7 @@ namespace API4SQL.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Cool", "Bracing1", "Chilly2", "Cool3", "Mild4", "Warm5", "Balmy6", "Hot7", "Sweltering8", "Scorching9"
+            "Cool", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
