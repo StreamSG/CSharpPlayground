@@ -7,19 +7,21 @@
 <h6>In this component we are going to write code to read and write to an SQL server using Entity Framework</h6>
 
 <MudInput @bind-Value="inputCustomerId" Label="Customer ID" Variant="Variant.Filled" />
-<MudButtonGroup>
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => GetAllCustomers())">Get All Customers</MudButton>
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => GetCustomerById(inputCustomerId))">Get Customer</MudButton>
-</MudButtonGroup>
+    <MudButton Color="Color.Primary" Varient="Varient.Filled" OnClick="@(() => GetCustomerById(inputCustomerId))">Get Customer</MudButton>
+    <MudButton Color="Color.Primary" Varient="Varient.Filled" OnClick="@(() => GetAllCustomers())">Get All Customers</MudButton>
+
+
 @if (errorMessage != null)
 {
-    <MudAlert Severity="Severity.Error" Dense="true" ShowCloseIcon="true">@errorMessage</MudAlert>
+    <MudAlert Severity="Severity.Error" Dense="true" ShowCloseIcon="true" CloseIconClicked="@(() => CloseError())">@errorMessage</MudAlert>
 }
+
 @if (isLoading == true)
 {
     <MudText Typo="Typo.h5">Waiting for database...</MudText>
     <MudProgressLinear Color="Color.Primary" Striped="true" Size="Size.Large" Indeterminate="true" />
 }
+
 else
 {
     <MudTable Items="customers" Dense="true" Hover="true" Striped="true">
@@ -42,7 +44,12 @@ else
     private int inputCustomerId;
     private bool isLoading;
     private string? errorMessage;
+    
 
+    private void CloseError()
+    {
+        errorMessage = null;
+    }
 
     private async Task GetAllCustomers()
     {
